@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=ASManager
+comment1.params=system\ user\ password
+comment1.target=ASManager(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=void\ create()
+comment3.params=srcPath\ destPath
+comment3.target=void\ copy(java.lang.String,\ java.lang.String)
+numComments=4

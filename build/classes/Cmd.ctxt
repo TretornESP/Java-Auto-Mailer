@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Cmd
+comment1.params=
+comment1.target=Cmd()
+comment2.params=cmd
+comment2.target=java.lang.String\ enterCmd(java.lang.String)
+numComments=3

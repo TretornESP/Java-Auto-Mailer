@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Config
+comment1.params=mail
+comment1.target=Config(SendMailSSL)
+comment10.params=
+comment10.target=void\ guardar()
+comment11.params=
+comment11.target=void\ cancelar()
+comment2.params=
+comment2.target=Config()
+comment3.params=
+comment3.target=void\ loadConfig()
+comment4.params=
+comment4.target=void\ loadLogin()
+comment5.params=
+comment5.target=void\ loadOptions()
+comment6.params=evt
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment7.params=evt
+comment7.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment8.params=
+comment8.target=void\ loadSendMethod()
+comment9.params=
+comment9.target=void\ loadLastConfig()
+numComments=12

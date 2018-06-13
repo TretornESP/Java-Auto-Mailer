@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=DefaultConfig
+comment1.params=
+comment1.target=DefaultConfig()
+comment2.params=host\ port\ user\ password\ sendAsText
+comment2.target=void\ update(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ boolean)
+numComments=3

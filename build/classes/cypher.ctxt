@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=cypher
+comment0.text=\ \r\n\ A\ utility\ class\ that\ encrypts\ or\ decrypts\ a\ file.\r\n\ @author\ www.codejava.net\r\n\r\n
+comment1.params=key\ inputFile\ outputFile
+comment1.target=void\ encrypt(java.lang.String,\ java.io.File,\ java.io.File)
+comment2.params=key\ inputFile\ outputFile
+comment2.target=void\ decrypt(java.lang.String,\ java.io.File,\ java.io.File)
+comment3.params=cipherMode\ key\ inputFile\ outputFile
+comment3.target=void\ doCrypto(int,\ java.lang.String,\ java.io.File,\ java.io.File)
+numComments=4

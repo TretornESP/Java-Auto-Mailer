@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=ProgramMenu
+comment1.params=
+comment1.target=ProgramMenu()
+comment2.params=
+comment2.target=void\ loadAbout()
+comment3.params=
+comment3.target=void\ loadText()
+comment4.params=
+comment4.target=void\ loadUninstall()
+comment5.params=evt
+comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=6

@@ -1,0 +1,151 @@
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+
+public class SendMailSSL {
+    
+    private Session session;
+    private Properties props;
+    private String host;
+    private String port;
+    private String user;
+    private String password;
+    private String attachment;
+    
+    private String subject;
+    private String text;
+    
+    private boolean sendAsText;
+    
+    public SendMailSSL() {
+    }
+    
+    public void setConfig(String host, String port, String user, String password, boolean sendAsText) {
+        this.host = host;
+        this.port = port;
+        this.user = user;
+        this.password = password;
+        this.sendAsText = sendAsText;
+    }
+    
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+    
+    public void setText(String text) {
+        this.text = text;
+    }
+    
+    public void setAttachment(String attachment) {
+        this.attachment = "C:\\MailOrganizer\\mail\\"+attachment;
+    }
+    
+    public void init(String[] receivers) {
+        if (host==null || port==null) {new Config(this); return;}
+        config();
+        auth();
+        if (sendAsText) {
+            send(receivers);
+        } else {
+            sendAttachment(receivers);
+        }
+    }
+    
+    public void config() {
+        props = new Properties();
+        //props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.socketFactory.port", port);
+        props.put("mail.smtp.socketFactory.class",
+                "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", port);
+    }
+
+    public void auth() {
+        session = Session.getInstance(props,
+            new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(user,password);
+                }
+            });
+    }
+    
+    public void send(String[] receivers) {
+        try {
+            for (String s: receivers) {
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(user));
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(s));
+                message.setSubject(subject);
+                message.setText(text);
+    
+                Transport.send(message);
+    
+            }
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public String getHost() {
+        return host;
+    }
+    public String getPort() {
+        return port;
+    }
+    public String getUser() {
+        return user;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public boolean getSendAsText() {
+        return sendAsText;
+    }
+    
+    public void sendAttachment(String[] receivers) {
+       if (attachment==null) { System.err.println("null att");return;}
+       File f = new File(attachment);
+       if(!f.exists() || f.isDirectory()) { 
+          System.err.println(attachment+" not a file");
+          return;
+        }
+       try {
+            for (String s: receivers) {
+                Message message = new MimeMessage(session);
+                Multipart multipart = new MimeMultipart();
+                
+                MimeBodyPart  attachPart = new MimeBodyPart();
+                try {
+                    attachPart.attachFile(attachment);
+                } catch (Exception e) {return;} 
+                
+                multipart.addBodyPart(attachPart);
+                
+                message.setContent(multipart);
+                message.setFrom(new InternetAddress(user));
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(s));
+                message.setSubject(subject);
+    
+                Transport.send(message);
+    
+            }
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

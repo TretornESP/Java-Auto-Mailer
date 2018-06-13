@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=JTabbedPaneCloseButton
+comment0.text=\r\n\ @author\ 6dc\r\n\r\n\ A\ class\ which\ creates\ a\ JTabbedPane\ and\ auto\ sets\ a\ close\ button\ when\ you\ add\ a\ tab\r\n
+comment1.params=
+comment1.target=JTabbedPaneCloseButton()
+comment2.params=title\ icon\ component\ tip
+comment2.target=void\ addTab(java.lang.String,\ javax.swing.Icon,\ java.awt.Component,\ java.lang.String)
+comment2.text=Override\ Addtab\ in\ order\ to\ add\ the\ close\ Button\ everytime
+comment3.params=title\ icon\ component
+comment3.target=void\ addTab(java.lang.String,\ javax.swing.Icon,\ java.awt.Component)
+comment4.params=title\ component
+comment4.target=void\ addTab(java.lang.String,\ java.awt.Component)
+comment5.params=title\ icon\ component\ tip
+comment5.target=void\ addTabNoExit(java.lang.String,\ javax.swing.Icon,\ java.awt.Component,\ java.lang.String)
+comment5.text=addTabNoExit
+comment6.params=title\ icon\ component
+comment6.target=void\ addTabNoExit(java.lang.String,\ javax.swing.Icon,\ java.awt.Component)
+comment7.params=title\ component
+comment7.target=void\ addTabNoExit(java.lang.String,\ java.awt.Component)
+numComments=8

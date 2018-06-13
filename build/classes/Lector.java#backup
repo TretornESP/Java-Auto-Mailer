@@ -1,0 +1,118 @@
+import java.io.*;
+import java.util.*;
+
+public class Lector {
+    
+    private FileReader f;
+    private BufferedReader b;
+    private String[] mail;
+    private String subject;
+    private boolean empty;
+    private File folder;
+    private File[] listOfFiles;
+    private int index;
+    private int size;
+    private ArrayList<String> text;
+    
+    public Lector() {
+        mail = null;
+        empty=false;
+        index=0;
+        folder = new File("C:\\MailOrganizer\\mail");
+        listOfFiles = folder.listFiles();
+        size = listOfFiles.length;
+        text = new ArrayList<>();
+        empty = (size<1);
+    }
+    
+    public String[] getMail() {
+        return mail;
+    }
+    
+    public void setMail(String mail) {
+        this.mail = mail.split(",");
+    }
+    
+    public String getSubject() {
+        return subject;
+    }
+    
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+        
+    public ArrayList<String> getFiles() {       
+        ArrayList<String> nombres = new ArrayList<>();
+        if (isEmpty()) {return nombres;}
+        for (int i = 0 ; i < size ; i++) {
+            nombres.add(listOfFiles[i].getName());
+        }
+        return nombres;
+    }
+    
+    public String getFile() {
+        return listOfFiles[index].getName();
+    }
+    
+    public boolean nextFile() {
+        if (index>size) {return false;}
+        index++;
+        read();
+        return true;
+    }
+    
+    public void setIndexByName(String name) {
+        mail = null;
+        if (isEmpty()) {return;}
+        for (int i = 0 ; i < size ; i++) {
+            if (listOfFiles[i].getName().equals(name)) {index=i;}
+        }        
+        read();
+    }
+    
+    public void setIndexByNamePreserveMail(String name) {
+        if (isEmpty()) {return;}
+        for (int i = 0 ; i < size ; i++) {
+            if (listOfFiles[i].getName().equals(name)) {index=i;}
+        }        
+        read();
+    }
+        
+    public void read() {
+        if (isEmpty()) {return;}
+        if (!listOfFiles[index].isFile()) {return;}
+        text = new ArrayList<>();
+        String linea;
+        try {
+            f = new FileReader(listOfFiles[index]);
+            b = new BufferedReader(f);
+            while ((linea = b.readLine())!=null) {
+                if (linea.startsWith("#~$MAIL:")) {
+                    mail=linea.substring(8).split(",");
+                } else if (linea.startsWith("#~$SUBJECT:")) {
+                    subject = linea.substring(10);
+                } else {
+                    text.add(linea+"\n");
+                }
+            } 
+        } catch (FileNotFoundException fe) {
+        } catch (IOException ioe) {;}
+    }
+    
+    public boolean isEmpty() {
+        return empty;
+    }
+    
+    public String getTextString() {
+        if (isEmpty()) {return "";}
+        String toSend = "";
+        for (String s: getText()) {
+            toSend+=s;
+        }
+        return toSend;
+    }
+         
+    public ArrayList<String> getText() {
+        return text;
+    }
+}
